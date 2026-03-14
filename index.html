@@ -216,6 +216,138 @@ footer{border-top:1px solid rgba(138,79,208,.09);padding:5rem 0 3rem;background:
 .fsoc a:hover::before{color:var(--v1);}
 .fbot{border-top:1px solid rgba(138,79,208,.05);margin-top:3rem;padding-top:2rem;display:flex;justify-content:space-between;align-items:center;}
 .fbot p{font-family:var(--r);font-size:.58rem;font-weight:200;letter-spacing:.08em;color:rgba(237,224,255,.18);}
+
+/* ─────────────────────────────────────────
+   GLOBAL: nunca partir palabras
+───────────────────────────────────────── */
+* {
+  word-break: keep-all;
+  overflow-wrap: normal;
+  hyphens: none;
+  -webkit-hyphens: none;
+}
+
+/* ─────────────────────────────────────────
+   TABLET  ≤ 900px
+───────────────────────────────────────── */
+@media (max-width: 900px) {
+  .wrap { padding: 0 2.5rem; }
+
+  /* nav: hide links, keep logo + button */
+  .nlinks { display: none; }
+  #nav { grid-template-columns: 1fr auto; padding: 0 2rem; }
+  .nr { justify-self: end; }
+
+  /* hero title smaller */
+  .h-title { font-size: clamp(2rem, 8vw, 3.8rem); letter-spacing: .22em; }
+
+  /* event cards: 2 columns */
+  .eg { grid-template-columns: repeat(2, 1fr); }
+  .ec:nth-child(3) { grid-column: 1 / -1; aspect-ratio: 16/9; }
+  .ec:nth-child(3) .eb { padding: 2.5rem 3rem; }
+
+  /* valores: 1 column */
+  .vg { grid-template-columns: 1fr; }
+
+  /* reservas: 1 column */
+  .rg { grid-template-columns: 1fr; gap: 4rem; }
+
+  /* footer: 2 columns */
+  .ftg { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  .ftg > div:first-child { grid-column: 1 / -1; }
+  .fbot { flex-direction: column; gap: .8rem; text-align: center; }
+}
+
+/* ─────────────────────────────────────────
+   MOBILE  ≤ 600px
+───────────────────────────────────────── */
+@media (max-width: 600px) {
+  /* cursor off on touch */
+  body { cursor: auto; }
+  #cur { display: none; }
+
+  .wrap { padding: 0 1.5rem; }
+
+  /* intro */
+  #ilogo { width: 72px !important; }
+  .il { font-size: clamp(1.1rem, 6vw, 1.8rem); letter-spacing: .28em; }
+  #itag { font-size: .82rem; letter-spacing: .08em; }
+  #iskip { right: 1.5rem; bottom: 1.5rem; }
+
+  /* nav */
+  #nav { padding: 0 1.5rem; height: 62px; }
+  .nl-text { font-size: .58rem; letter-spacing: .22em; }
+  .nbtn { padding: .5rem 1rem; font-size: .52rem; letter-spacing: .14em; }
+
+  /* hero */
+  .h-logo { width: 52px !important; margin-bottom: 1.2rem; }
+  .h-eye { font-size: .48rem; letter-spacing: .3em; margin-bottom: 1rem; }
+  .h-title {
+    font-size: clamp(1.8rem, 9.5vw, 3rem);
+    letter-spacing: .14em;
+    white-space: nowrap;
+  }
+  .h-tag { font-size: .9rem; letter-spacing: .04em; margin-bottom: 2.5rem; white-space: nowrap; }
+  .h-cta { padding: .85rem 2rem; font-size: .52rem; letter-spacing: .18em; }
+  .h-scroll { bottom: 1.8rem; }
+
+  /* sections spacing */
+  #sesiones, #valores, #reservas { padding: 5rem 0; }
+  #quote { padding: 4rem 0; }
+  #bar { padding: 2.5rem 0; }
+
+  /* section headers */
+  .sl { font-size: .48rem; letter-spacing: .3em; }
+  .st { font-size: clamp(1.6rem, 6vw, 2.4rem); }
+  .sh { margin-bottom: 3rem; }
+
+  /* events: 1 column stacked */
+  .eg { grid-template-columns: 1fr; gap: 2px; }
+  .ec { aspect-ratio: 4/3; }
+  .ec:nth-child(3) { grid-column: auto; aspect-ratio: 4/3; }
+  .ec:nth-child(3) .eb { padding: 1.5rem; }
+  .ename { font-size: 1.3rem; }
+  .egenre { font-size: .58rem; }
+  .eb { padding: 1.5rem; }
+
+  /* ticker */
+  .bi { font-size: .58rem; letter-spacing: .15em; }
+
+  /* valores */
+  .vg { margin-top: 3rem; }
+  .vi { padding: 2.5rem 2rem; }
+  .vname { font-size: 1.2rem; }
+  .vdesc { font-size: .72rem; }
+
+  /* quote */
+  .qt { font-size: clamp(1.1rem, 4.5vw, 1.6rem); margin: 1.8rem auto 1.2rem; }
+  .qby { font-size: .48rem; letter-spacing: .22em; }
+
+  /* reservas */
+  .rg { gap: 3rem; }
+  .ri h2 { font-size: clamp(1.8rem, 7vw, 2.8rem); }
+  .fgr { grid-template-columns: 1fr; gap: 0; }
+  .mw { grid-template-columns: 1fr; gap: .5rem; }
+  .mo + label { padding: 1rem; }
+  .ftitle { font-size: 1.3rem; }
+
+  /* footer */
+  .ftg { grid-template-columns: 1fr; gap: 2.5rem; }
+  .flogo { font-size: .6rem; letter-spacing: .2em; }
+  .fbp { max-width: 100%; font-size: .7rem; }
+  .fbot { flex-direction: column; gap: .6rem; text-align: center; }
+  .fbot p { font-size: .52rem; }
+}
+
+/* ─────────────────────────────────────────
+   VERY SMALL  ≤ 380px
+───────────────────────────────────────── */
+@media (max-width: 380px) {
+  .h-title { font-size: clamp(1.5rem, 8vw, 2.2rem); letter-spacing: .1em; }
+  .h-tag   { font-size: .8rem; }
+  .h-cta   { padding: .75rem 1.5rem; font-size: .48rem; }
+  .wrap    { padding: 0 1.2rem; }
+}
 </style>
 </head>
 <body>
@@ -503,7 +635,7 @@ footer{border-top:1px solid rgba(138,79,208,.09);padding:5rem 0 3rem;background:
         <a href="#">Facebook</a>
         <a href="#">Spotify</a>
         <a href="#">SoundCloud</a>
-        <a href="#">info@velvetinfinity.com</a>
+        <a href="#"><span class="__cf_email__" data-cfemail="95fcfbf3fad5e3f0f9e3f0e1fcfbf3fcfbfce1ecbbf6faf8">[email&#160;protected]</span></a>
       </div>
     </div>
     <div class="fbot">
@@ -513,7 +645,7 @@ footer{border-top:1px solid rgba(138,79,208,.09);padding:5rem 0 3rem;background:
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* STAR FIELD — hero only */
 (function() {
   var sc = document.getElementById('star-cv');
