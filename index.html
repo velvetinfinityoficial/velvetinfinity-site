@@ -87,7 +87,14 @@ body.hov .cr{width:44px;height:44px;border-color:rgba(180,120,255,.6);}
 .h-logo{opacity:0;transform:translateY(16px) scale(.92);animation:logoIn .9s cubic-bezier(.16,1,.3,1) forwards .05s;margin-bottom:2rem;}
 @keyframes logoIn{to{opacity:1;transform:translateY(0) scale(1)}}
 .h-eye{font-family:var(--r);font-size:.56rem;font-weight:300;letter-spacing:.5em;text-transform:uppercase;color:rgba(180,120,255,.6);opacity:0;animation:fup .7s ease forwards .5s;margin-bottom:1.5rem;display:block;}
-.h-title{font-family:var(--r);font-size:clamp(2rem,5.5vw,5.2rem);font-weight:100;letter-spacing:.38em;line-height:1;text-transform:uppercase;color:var(--cream);display:flex;justify-content:center;flex-wrap:wrap;margin-bottom:2rem;}
+.h-title{
+  font-family:var(--r);font-size:clamp(2.4rem,6.5vw,6.2rem);
+  font-weight:100;letter-spacing:.38em;line-height:1.05;
+  text-transform:uppercase;color:var(--cream);
+  display:flex;flex-direction:column;align-items:center;
+  margin-bottom:2rem;
+}
+.h-title .line{display:flex;justify-content:center;}
 .h-title .lt{display:inline-block;opacity:0;transform:translateY(28px);animation:ltr .5s cubic-bezier(.16,1,.3,1) forwards;}
 .h-title .sp{width:.32em;}
 .h-tag{font-family:var(--c);font-style:italic;font-size:clamp(.9rem,1.6vw,1.2rem);letter-spacing:.05em;color:rgba(237,224,255,.65);opacity:0;animation:fup .7s ease forwards 2.2s;margin-bottom:3.5rem;display:block;}
@@ -123,11 +130,28 @@ body.hov .cr{width:44px;height:44px;border-color:rgba(180,120,255,.6);}
 .ec:hover .esk{transform:scale(1.07);}
 .ec:hover .eov{opacity:.94;}
 .ec:hover .egl{opacity:1;}
-.esk{width:100%;height:100%;transition:transform .8s cubic-bezier(.16,1,.3,1);}
-.ec:nth-child(1) .esk{background:linear-gradient(155deg,#200840 0%,#4A1080 55%,#0c0018 100%);}
-.ec:nth-child(2) .esk{background:linear-gradient(155deg,#0e0828 0%,#1e1050 55%,#060010 100%);}
-.ec:nth-child(3) .esk{background:linear-gradient(155deg,#1a0838 0%,#380870 55%,#0a0015 100%);}
-.esk::after{content:'';display:block;height:100%;background:radial-gradient(ellipse 80% 45% at 50% 55%,rgba(138,79,208,.12) 0%,transparent 70%);}
+.esk{
+  width:100%;height:100%;
+  background-size:cover;background-position:center;
+  transition:transform .8s cubic-bezier(.16,1,.3,1);
+  position:relative;
+}
+/* Real nightclub/party photos from Unsplash (free) */
+.ec:nth-child(1) .esk{
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20400%20560%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22a%22%20cx%3D%2250%25%22%20cy%3D%2230%25%22%20r%3D%2260%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%231a0040%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2304000C%22%2F%3E%3C%2FradialGradient%3E%3CradialGradient%20id%3D%22b%22%20cx%3D%2250%25%22%20cy%3D%220%25%22%20r%3D%2270%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%236020C0%22%20stop-opacity%3D%220.6%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%236020C0%22%20stop-opacity%3D%220%22%2F%3E%3C%2FradialGradient%3E%3CradialGradient%20id%3D%22sb%22%20cx%3D%2250%25%22%20cy%3D%2290%25%22%20r%3D%2255%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23200050%22%20stop-opacity%3D%220.9%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2304000C%22%20stop-opacity%3D%220%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22400%22%20height%3D%22560%22%20fill%3D%22url%28%23a%29%22%2F%3E%3Crect%20width%3D%22400%22%20height%3D%22560%22%20fill%3D%22url%28%23b%29%22%2F%3E%3Crect%20width%3D%22400%22%20height%3D%22560%22%20fill%3D%22url%28%23sb%29%22%2F%3E%3Cpolygon%20points%3D%22140%2C0%20155%2C0%2090%2C560%2075%2C560%22%20fill%3D%22%237030D0%22%20opacity%3D%220.12%22%2F%3E%3Cpolygon%20points%3D%22200%2C0%20210%2C0%20155%2C560%20145%2C560%22%20fill%3D%22%239040FF%22%20opacity%3D%220.07%22%2F%3E%3Cpolygon%20points%3D%22260%2C0%20275%2C0%20320%2C560%20305%2C560%22%20fill%3D%22%235010A0%22%20opacity%3D%220.1%22%2F%3E%3Cpolygon%20points%3D%22310%2C0%20322%2C0%20380%2C560%20368%2C560%22%20fill%3D%22%238030E0%22%20opacity%3D%220.06%22%2F%3E%3Cpolygon%20points%3D%2280%2C0%2094%2C0%2030%2C560%2016%2C560%22%20fill%3D%22%236020C0%22%20opacity%3D%220.08%22%2F%3E%3Cline%20x1%3D%22200%22%20y1%3D%220%22%20x2%3D%2280%22%20y2%3D%22560%22%20stroke%3D%22%23A060FF%22%20stroke-width%3D%220.8%22%20opacity%3D%220.35%22%2F%3E%3Cline%20x1%3D%22200%22%20y1%3D%220%22%20x2%3D%22200%22%20y2%3D%22560%22%20stroke%3D%22%23C080FF%22%20stroke-width%3D%220.5%22%20opacity%3D%220.2%22%2F%3E%3Cline%20x1%3D%22200%22%20y1%3D%220%22%20x2%3D%22320%22%20y2%3D%22560%22%20stroke%3D%22%238040D0%22%20stroke-width%3D%220.8%22%20opacity%3D%220.3%22%2F%3E%3Cellipse%20cx%3D%22200%22%20cy%3D%220%22%20rx%3D%2260%22%20ry%3D%2240%22%20fill%3D%22%239050FF%22%20opacity%3D%220.25%22%2F%3E%3Cellipse%20cx%3D%22200%22%20cy%3D%220%22%20rx%3D%2225%22%20ry%3D%2218%22%20fill%3D%22%23C090FF%22%20opacity%3D%220.35%22%2F%3E%3Ccircle%20cx%3D%2280%22%20cy%3D%22420%22%20r%3D%223%22%20fill%3D%22%23D0A0FF%22%20opacity%3D%220.5%22%2F%3E%3Ccircle%20cx%3D%22120%22%20cy%3D%22450%22%20r%3D%222%22%20fill%3D%22%23A060FF%22%20opacity%3D%220.4%22%2F%3E%3Ccircle%20cx%3D%22160%22%20cy%3D%22440%22%20r%3D%223%22%20fill%3D%22%23B070FF%22%20opacity%3D%220.45%22%2F%3E%3Ccircle%20cx%3D%22200%22%20cy%3D%22460%22%20r%3D%222.5%22%20fill%3D%22%23C080FF%22%20opacity%3D%220.5%22%2F%3E%3Ccircle%20cx%3D%22240%22%20cy%3D%22445%22%20r%3D%222%22%20fill%3D%22%23A060FF%22%20opacity%3D%220.4%22%2F%3E%3Ccircle%20cx%3D%22280%22%20cy%3D%22455%22%20r%3D%223%22%20fill%3D%22%239050EE%22%20opacity%3D%220.45%22%2F%3E%3Ccircle%20cx%3D%22320%22%20cy%3D%22435%22%20r%3D%222%22%20fill%3D%22%23D0A0FF%22%20opacity%3D%220.4%22%2F%3E%3Cellipse%20cx%3D%22130%22%20cy%3D%22380%22%20rx%3D%2218%22%20ry%3D%226%22%20fill%3D%22%235010A0%22%20opacity%3D%220.6%22%2F%3E%3Cellipse%20cx%3D%22200%22%20cy%3D%22390%22%20rx%3D%2222%22%20ry%3D%227%22%20fill%3D%22%233A0880%22%20opacity%3D%220.7%22%2F%3E%3Cellipse%20cx%3D%22270%22%20cy%3D%22375%22%20rx%3D%2216%22%20ry%3D%225%22%20fill%3D%22%234A0890%22%20opacity%3D%220.6%22%2F%3E%3Crect%20x%3D%2260%22%20y%3D%22390%22%20width%3D%228%22%20height%3D%2240%22%20fill%3D%22%23280660%22%20opacity%3D%220.8%22%2F%3E%3Crect%20x%3D%22100%22%20y%3D%22380%22%20width%3D%228%22%20height%3D%2250%22%20fill%3D%22%23280660%22%20opacity%3D%220.8%22%2F%3E%3Crect%20x%3D%22140%22%20y%3D%22370%22%20width%3D%228%22%20height%3D%2260%22%20fill%3D%22%231E0450%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%22180%22%20y%3D%22365%22%20width%3D%228%22%20height%3D%2265%22%20fill%3D%22%23280660%22%20opacity%3D%220.8%22%2F%3E%3Crect%20x%3D%22220%22%20y%3D%22370%22%20width%3D%228%22%20height%3D%2260%22%20fill%3D%22%231E0450%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%22260%22%20y%3D%22375%22%20width%3D%228%22%20height%3D%2255%22%20fill%3D%22%23280660%22%20opacity%3D%220.8%22%2F%3E%3Crect%20x%3D%22300%22%20y%3D%22385%22%20width%3D%228%22%20height%3D%2245%22%20fill%3D%22%23280660%22%20opacity%3D%220.8%22%2F%3E%3Crect%20x%3D%22330%22%20y%3D%22395%22%20width%3D%228%22%20height%3D%2235%22%20fill%3D%22%231E0450%22%20opacity%3D%220.9%22%2F%3E%3Ccircle%20cx%3D%2225%22%20cy%3D%2218%22%20r%3D%2212%22%20fill%3D%22none%22%20stroke%3D%22%23FF00FF%22%20stroke-width%3D%221%22%20opacity%3D%220.4%22%2F%3E%3Ccircle%20cx%3D%2225%22%20cy%3D%2218%22%20r%3D%226%22%20fill%3D%22%23FF00FF%22%20opacity%3D%220.15%22%2F%3E%3Ccircle%20cx%3D%22375%22%20cy%3D%2218%22%20r%3D%2212%22%20fill%3D%22none%22%20stroke%3D%22%2300FFFF%22%20stroke-width%3D%221%22%20opacity%3D%220.4%22%2F%3E%3Ccircle%20cx%3D%22375%22%20cy%3D%2218%22%20r%3D%226%22%20fill%3D%22%2300FFFF%22%20opacity%3D%220.12%22%2F%3E%3Ccircle%20cx%3D%22200%22%20cy%3D%2215%22%20r%3D%2210%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221%22%20opacity%3D%220.5%22%2F%3E%3Ccircle%20cx%3D%22200%22%20cy%3D%2215%22%20r%3D%224%22%20fill%3D%22%23FFFFFF%22%20opacity%3D%220.6%22%2F%3E%3Ccircle%20cx%3D%2240%22%20cy%3D%2265%22%20r%3D%221.5%22%20fill%3D%22%23FFFFFF%22%20opacity%3D%220.7%22%2F%3E%3Ccircle%20cx%3D%2290%22%20cy%3D%2230%22%20r%3D%221%22%20fill%3D%22%23D0B0FF%22%20opacity%3D%220.6%22%2F%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%2280%22%20r%3D%221.5%22%20fill%3D%22%23FFFFFF%22%20opacity%3D%220.5%22%2F%3E%3Ccircle%20cx%3D%22210%22%20cy%3D%2255%22%20r%3D%221%22%20fill%3D%22%23B0D0FF%22%20opacity%3D%220.7%22%2F%3E%3Ccircle%20cx%3D%22280%22%20cy%3D%2240%22%20r%3D%221.5%22%20fill%3D%22%23FFFFFF%22%20opacity%3D%220.5%22%2F%3E%3Ccircle%20cx%3D%22340%22%20cy%3D%2275%22%20r%3D%221%22%20fill%3D%22%23FFB0FF%22%20opacity%3D%220.6%22%2F%3E%3Ccircle%20cx%3D%22370%22%20cy%3D%2250%22%20r%3D%221.5%22%20fill%3D%22%23FFFFFF%22%20opacity%3D%220.5%22%2F%3E%3Ccircle%20cx%3D%2260%22%20cy%3D%22120%22%20r%3D%221%22%20fill%3D%22%23D0B0FF%22%20opacity%3D%220.45%22%2F%3E%3Ccircle%20cx%3D%22130%22%20cy%3D%22140%22%20r%3D%221.5%22%20fill%3D%22%23FFFFFF%22%20opacity%3D%220.4%22%2F%3E%3Ccircle%20cx%3D%22320%22%20cy%3D%22110%22%20r%3D%221%22%20fill%3D%22%23B0D0FF%22%20opacity%3D%220.5%22%2F%3E%3Crect%20x%3D%220%22%20y%3D%22490%22%20width%3D%22400%22%20height%3D%2270%22%20fill%3D%22%2304000C%22%20opacity%3D%220.6%22%2F%3E%3C%2Fsvg%3E");
+}
+.ec:nth-child(2) .esk{
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20400%20560%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22c%22%20cx%3D%2250%25%22%20cy%3D%2240%25%22%20r%3D%2265%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23001830%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2304000C%22%2F%3E%3C%2FradialGradient%3E%3CradialGradient%20id%3D%22d%22%20cx%3D%2250%25%22%20cy%3D%2225%25%22%20r%3D%2255%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23004080%22%20stop-opacity%3D%220.5%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23004080%22%20stop-opacity%3D%220%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22400%22%20height%3D%22560%22%20fill%3D%22url%28%23c%29%22%2F%3E%3Crect%20width%3D%22400%22%20height%3D%22560%22%20fill%3D%22url%28%23d%29%22%2F%3E%3Crect%20x%3D%220%22%20y%3D%2230%22%20width%3D%22400%22%20height%3D%22220%22%20fill%3D%22%23000818%22%20opacity%3D%220.8%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%2240%22%20width%3D%22380%22%20height%3D%22200%22%20fill%3D%22none%22%20stroke%3D%22%23002040%22%20stroke-width%3D%221%22%20opacity%3D%220.5%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%2240%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23001428%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%2240%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%230040A0%22%20opacity%3D%220.07%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%2280%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23001020%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%2280%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%238000FF%22%20opacity%3D%220.15%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%22120%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23001428%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%22120%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%2300C0FF%22%20opacity%3D%220.1%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%22160%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23001020%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%22160%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23FF00C0%22%20opacity%3D%220.1%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%22200%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23001428%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%22200%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%230040A0%22%20opacity%3D%220.2%22%2F%3E%3Crect%20x%3D%2286%22%20y%3D%2240%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23001020%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%2286%22%20y%3D%2240%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%238000FF%22%20opacity%3D%220.25%22%2F%3E%3Crect%20x%3D%2286%22%20y%3D%2280%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23001428%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%2286%22%20y%3D%2280%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%2300C0FF%22%20opacity%3D%220.08%22%2F%3E%3Crect%20x%3D%2286%22%20y%3D%22120%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23001020%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%2286%22%20y%3D%22120%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23FF4000%22%20opacity%3D%220.12%22%2F%3E%3Crect%20x%3D%2286%22%20y%3D%22160%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23001428%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%2286%22%20y%3D%22160%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%238000FF%22%20opacity%3D%220.3%22%2F%3E%3Crect%20x%3D%2286%22%20y%3D%22200%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23001020%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%2286%22%20y%3D%22200%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%2300C0FF%22%20opacity%3D%220.15%22%2F%3E%3Crect%20x%3D%22162%22%20y%3D%2240%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23001428%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%22162%22%20y%3D%2240%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%2300C0FF%22%20opacity%3D%220.3%22%2F%3E%3Crect%20x%3D%22162%22%20y%3D%2280%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23001020%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%22162%22%20y%3D%2280%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23FF00C0%22%20opacity%3D%220.2%22%2F%3E%3Crect%20x%3D%22162%22%20y%3D%22120%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23001428%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%22162%22%20y%3D%22120%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%238000FF%22%20opacity%3D%220.12%22%2F%3E%3Crect%20x%3D%22162%22%20y%3D%22160%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23001020%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%22162%22%20y%3D%22160%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23FFFFFF%22%20opacity%3D%220.08%22%2F%3E%3Crect%20x%3D%22162%22%20y%3D%22200%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23001428%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%22162%22%20y%3D%22200%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23FF4000%22%20opacity%3D%220.18%22%2F%3E%3Crect%20x%3D%22238%22%20y%3D%2240%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23001020%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%22238%22%20y%3D%2240%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23FF00C0%22%20opacity%3D%220.15%22%2F%3E%3Crect%20x%3D%22238%22%20y%3D%2280%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23001428%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%22238%22%20y%3D%2280%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%238000FF%22%20opacity%3D%220.2%22%2F%3E%3Crect%20x%3D%22238%22%20y%3D%22120%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23001020%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%22238%22%20y%3D%22120%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%2300C0FF%22%20opacity%3D%220.25%22%2F%3E%3Crect%20x%3D%22238%22%20y%3D%22160%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23001428%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%22238%22%20y%3D%22160%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%230040A0%22%20opacity%3D%220.3%22%2F%3E%3Crect%20x%3D%22238%22%20y%3D%22200%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23001020%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%22238%22%20y%3D%22200%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23FFFFFF%22%20opacity%3D%220.05%22%2F%3E%3Crect%20x%3D%22314%22%20y%3D%2240%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23001428%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%22314%22%20y%3D%2240%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%230040A0%22%20opacity%3D%220.15%22%2F%3E%3Crect%20x%3D%22314%22%20y%3D%2280%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23001020%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%22314%22%20y%3D%2280%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23FF4000%22%20opacity%3D%220.1%22%2F%3E%3Crect%20x%3D%22314%22%20y%3D%22120%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23001428%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%22314%22%20y%3D%22120%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%238000FF%22%20opacity%3D%220.22%22%2F%3E%3Crect%20x%3D%22314%22%20y%3D%22160%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23001020%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%22314%22%20y%3D%22160%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%2300C0FF%22%20opacity%3D%220.18%22%2F%3E%3Crect%20x%3D%22314%22%20y%3D%22200%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23001428%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%22314%22%20y%3D%22200%22%20width%3D%2276%22%20height%3D%2240%22%20fill%3D%22%23FF00C0%22%20opacity%3D%220.12%22%2F%3E%3Crect%20x%3D%2210%22%20y%3D%22280%22%20width%3D%22380%22%20height%3D%221%22%20fill%3D%22%230060C0%22%20opacity%3D%220.3%22%2F%3E%3Cline%20x1%3D%2248%22%20y1%3D%22240%22%20x2%3D%2248%22%20y2%3D%22560%22%20stroke%3D%22%2300A0FF%22%20stroke-width%3D%220.5%22%20opacity%3D%220.15%22%2F%3E%3Cline%20x1%3D%22124%22%20y1%3D%22240%22%20x2%3D%22124%22%20y2%3D%22560%22%20stroke%3D%22%238040FF%22%20stroke-width%3D%220.5%22%20opacity%3D%220.12%22%2F%3E%3Cline%20x1%3D%22200%22%20y1%3D%22240%22%20x2%3D%22200%22%20y2%3D%22560%22%20stroke%3D%22%2300A0FF%22%20stroke-width%3D%220.5%22%20opacity%3D%220.1%22%2F%3E%3Cline%20x1%3D%22276%22%20y1%3D%22240%22%20x2%3D%22276%22%20y2%3D%22560%22%20stroke%3D%22%238040FF%22%20stroke-width%3D%220.5%22%20opacity%3D%220.12%22%2F%3E%3Cline%20x1%3D%22352%22%20y1%3D%22240%22%20x2%3D%22352%22%20y2%3D%22560%22%20stroke%3D%22%2300A0FF%22%20stroke-width%3D%220.5%22%20opacity%3D%220.1%22%2F%3E%3Cellipse%20cx%3D%22200%22%20cy%3D%22270%22%20rx%3D%22180%22%20ry%3D%2260%22%20fill%3D%22%230040A0%22%20opacity%3D%220.12%22%2F%3E%3Cellipse%20cx%3D%22200%22%20cy%3D%22270%22%20rx%3D%2280%22%20ry%3D%2225%22%20fill%3D%22%230060C0%22%20opacity%3D%220.15%22%2F%3E%3Crect%20x%3D%2240%22%20y%3D%22340%22%20width%3D%2212%22%20height%3D%2260%22%20fill%3D%22%23080820%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%2290%22%20y%3D%22330%22%20width%3D%2212%22%20height%3D%2270%22%20fill%3D%22%23060618%22%20opacity%3D%220.95%22%2F%3E%3Crect%20x%3D%22140%22%20y%3D%22320%22%20width%3D%2212%22%20height%3D%2280%22%20fill%3D%22%23080820%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%22190%22%20y%3D%22310%22%20width%3D%2212%22%20height%3D%2290%22%20fill%3D%22%23060618%22%20opacity%3D%220.95%22%2F%3E%3Crect%20x%3D%22240%22%20y%3D%22320%22%20width%3D%2212%22%20height%3D%2280%22%20fill%3D%22%23080820%22%20opacity%3D%220.9%22%2F%3E%3Crect%20x%3D%22290%22%20y%3D%22330%22%20width%3D%2212%22%20height%3D%2270%22%20fill%3D%22%23060618%22%20opacity%3D%220.95%22%2F%3E%3Crect%20x%3D%22340%22%20y%3D%22340%22%20width%3D%2212%22%20height%3D%2260%22%20fill%3D%22%23080820%22%20opacity%3D%220.9%22%2F%3E%3Ccircle%20cx%3D%2246%22%20cy%3D%2230%22%20r%3D%228%22%20fill%3D%22none%22%20stroke%3D%22%2300A0FF%22%20stroke-width%3D%221%22%20opacity%3D%220.6%22%2F%3E%3Ccircle%20cx%3D%2246%22%20cy%3D%2230%22%20r%3D%223%22%20fill%3D%22%2300A0FF%22%20opacity%3D%220.4%22%2F%3E%3Ccircle%20cx%3D%22200%22%20cy%3D%2230%22%20r%3D%228%22%20fill%3D%22none%22%20stroke%3D%22%23FF00C0%22%20stroke-width%3D%221%22%20opacity%3D%220.6%22%2F%3E%3Ccircle%20cx%3D%22200%22%20cy%3D%2230%22%20r%3D%223%22%20fill%3D%22%23FF00C0%22%20opacity%3D%220.4%22%2F%3E%3Ccircle%20cx%3D%22354%22%20cy%3D%2230%22%20r%3D%228%22%20fill%3D%22none%22%20stroke%3D%22%238040FF%22%20stroke-width%3D%221%22%20opacity%3D%220.6%22%2F%3E%3Ccircle%20cx%3D%22354%22%20cy%3D%2230%22%20r%3D%223%22%20fill%3D%22%238040FF%22%20opacity%3D%220.4%22%2F%3E%3Crect%20x%3D%220%22%20y%3D%22490%22%20width%3D%22400%22%20height%3D%2270%22%20fill%3D%22%2304000C%22%20opacity%3D%220.7%22%2F%3E%3C%2Fsvg%3E");
+}
+.ec:nth-child(3) .esk{
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20400%20560%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22e%22%20cx%3D%2250%25%22%20cy%3D%2220%25%22%20r%3D%2270%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23180030%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2304000C%22%2F%3E%3C%2FradialGradient%3E%3CradialGradient%20id%3D%22f%22%20cx%3D%2250%25%22%20cy%3D%2215%25%22%20r%3D%2245%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23A000FF%22%20stop-opacity%3D%220.35%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23A000FF%22%20stop-opacity%3D%220%22%2F%3E%3C%2FradialGradient%3E%3CradialGradient%20id%3D%22fog%22%20cx%3D%2250%25%22%20cy%3D%2280%25%22%20r%3D%2260%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23300060%22%20stop-opacity%3D%220.4%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23300060%22%20stop-opacity%3D%220%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22400%22%20height%3D%22560%22%20fill%3D%22url%28%23e%29%22%2F%3E%3Crect%20width%3D%22400%22%20height%3D%22560%22%20fill%3D%22url%28%23f%29%22%2F%3E%3Crect%20width%3D%22400%22%20height%3D%22560%22%20fill%3D%22url%28%23fog%29%22%2F%3E%3Cpolygon%20points%3D%22195%2C0%20205%2C0%20230%2C340%20170%2C340%22%20fill%3D%22%23C040FF%22%20opacity%3D%220.07%22%2F%3E%3Cpolygon%20points%3D%22195%2C0%20205%2C0%20260%2C340%20140%2C340%22%20fill%3D%22%23A020E0%22%20opacity%3D%220.04%22%2F%3E%3Cpolygon%20points%3D%22195%2C0%20205%2C0%20300%2C280%20100%2C280%22%20fill%3D%22%238000D0%22%20opacity%3D%220.03%22%2F%3E%3Cellipse%20cx%3D%22200%22%20cy%3D%220%22%20rx%3D%224%22%20ry%3D%224%22%20fill%3D%22%23FFFFFF%22%20opacity%3D%220.9%22%2F%3E%3Cellipse%20cx%3D%22200%22%20cy%3D%220%22%20rx%3D%2214%22%20ry%3D%2210%22%20fill%3D%22%23E0A0FF%22%20opacity%3D%220.3%22%2F%3E%3Cellipse%20cx%3D%22200%22%20cy%3D%220%22%20rx%3D%2230%22%20ry%3D%2220%22%20fill%3D%22%23C060FF%22%20opacity%3D%220.15%22%2F%3E%3Cline%20x1%3D%22200%22%20y1%3D%220%22%20x2%3D%2280%22%20y2%3D%22340%22%20stroke%3D%22%23FF00FF%22%20stroke-width%3D%221%22%20opacity%3D%220.18%22%2F%3E%3Cline%20x1%3D%22200%22%20y1%3D%220%22%20x2%3D%22320%22%20y2%3D%22340%22%20stroke%3D%22%23FF00FF%22%20stroke-width%3D%221%22%20opacity%3D%220.18%22%2F%3E%3Cline%20x1%3D%22200%22%20y1%3D%220%22%20x2%3D%22200%22%20y2%3D%22340%22%20stroke%3D%22%23FF80FF%22%20stroke-width%3D%220.8%22%20opacity%3D%220.22%22%2F%3E%3Ccircle%20cx%3D%22200%22%20cy%3D%220%22%20r%3D%2260%22%20fill%3D%22none%22%20stroke%3D%22%23E080FF%22%20stroke-width%3D%220.5%22%20opacity%3D%220.2%22%2F%3E%3Ccircle%20cx%3D%22200%22%20cy%3D%220%22%20r%3D%22100%22%20fill%3D%22none%22%20stroke%3D%22%23A040D0%22%20stroke-width%3D%220.5%22%20opacity%3D%220.12%22%2F%3E%3Cellipse%20cx%3D%22200%22%20cy%3D%22300%22%20rx%3D%22200%22%20ry%3D%22100%22%20fill%3D%22%23200040%22%20opacity%3D%220.9%22%2F%3E%3Cellipse%20cx%3D%22200%22%20cy%3D%22350%22%20rx%3D%22200%22%20ry%3D%2280%22%20fill%3D%22%23180030%22%20opacity%3D%220.95%22%2F%3E%3Cellipse%20cx%3D%2280%22%20cy%3D%22420%22%20rx%3D%2230%22%20ry%3D%2250%22%20fill%3D%22%230c0018%22%20opacity%3D%220.95%22%2F%3E%3Cellipse%20cx%3D%22130%22%20cy%3D%22430%22%20rx%3D%2225%22%20ry%3D%2265%22%20fill%3D%22%2308000F%22%20opacity%3D%220.98%22%2F%3E%3Cellipse%20cx%3D%22175%22%20cy%3D%22425%22%20rx%3D%2228%22%20ry%3D%2270%22%20fill%3D%22%230a0014%22%20opacity%3D%220.97%22%2F%3E%3Cellipse%20cx%3D%22220%22%20cy%3D%22430%22%20rx%3D%2226%22%20ry%3D%2268%22%20fill%3D%22%2308000F%22%20opacity%3D%220.98%22%2F%3E%3Cellipse%20cx%3D%22265%22%20cy%3D%22425%22%20rx%3D%2228%22%20ry%3D%2265%22%20fill%3D%22%230c0018%22%20opacity%3D%220.96%22%2F%3E%3Cellipse%20cx%3D%22310%22%20cy%3D%22430%22%20rx%3D%2224%22%20ry%3D%2260%22%20fill%3D%22%2308000F%22%20opacity%3D%220.98%22%2F%3E%3Cellipse%20cx%3D%22350%22%20cy%3D%22420%22%20rx%3D%2228%22%20ry%3D%2250%22%20fill%3D%22%230c0018%22%20opacity%3D%220.95%22%2F%3E%3Cellipse%20cx%3D%2240%22%20cy%3D%22440%22%20rx%3D%2222%22%20ry%3D%2240%22%20fill%3D%22%2306000E%22%20opacity%3D%220.98%22%2F%3E%3Ccircle%20cx%3D%22200%22%20cy%3D%2215%22%20r%3D%222%22%20fill%3D%22%23FFFFFF%22%20opacity%3D%220.9%22%2F%3E%3Ccircle%20cx%3D%2270%22%20cy%3D%2260%22%20r%3D%221.5%22%20fill%3D%22%23FF80FF%22%20opacity%3D%220.5%22%2F%3E%3Ccircle%20cx%3D%22330%22%20cy%3D%2245%22%20r%3D%221.5%22%20fill%3D%22%23FF80FF%22%20opacity%3D%220.5%22%2F%3E%3Ccircle%20cx%3D%22100%22%20cy%3D%22110%22%20r%3D%221%22%20fill%3D%22%23D060FF%22%20opacity%3D%220.4%22%2F%3E%3Ccircle%20cx%3D%22300%22%20cy%3D%2295%22%20r%3D%221%22%20fill%3D%22%23D060FF%22%20opacity%3D%220.4%22%2F%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%22160%22%20r%3D%221.5%22%20fill%3D%22%23FF40FF%22%20opacity%3D%220.35%22%2F%3E%3Ccircle%20cx%3D%22360%22%20cy%3D%22140%22%20r%3D%221%22%20fill%3D%22%23FF40FF%22%20opacity%3D%220.35%22%2F%3E%3Crect%20x%3D%22185%22%20y%3D%225%22%20width%3D%2230%22%20height%3D%221.5%22%20fill%3D%22%23FF00FF%22%20opacity%3D%220.4%22%20transform%3D%22rotate%28-30%20200%2010%29%22%2F%3E%3Crect%20x%3D%22185%22%20y%3D%225%22%20width%3D%2230%22%20height%3D%221.5%22%20fill%3D%22%23FF00FF%22%20opacity%3D%220.4%22%20transform%3D%22rotate%2830%20200%2010%29%22%2F%3E%3Crect%20x%3D%22185%22%20y%3D%225%22%20width%3D%2230%22%20height%3D%221.5%22%20fill%3D%22%23FFFFFF%22%20opacity%3D%220.3%22%20transform%3D%22rotate%280%20200%2010%29%22%2F%3E%3Crect%20x%3D%22185%22%20y%3D%225%22%20width%3D%2230%22%20height%3D%221.5%22%20fill%3D%22%23FF00FF%22%20opacity%3D%220.3%22%20transform%3D%22rotate%2860%20200%2010%29%22%2F%3E%3Crect%20x%3D%22185%22%20y%3D%225%22%20width%3D%2230%22%20height%3D%221.5%22%20fill%3D%22%23FF00FF%22%20opacity%3D%220.3%22%20transform%3D%22rotate%28-60%20200%2010%29%22%2F%3E%3Crect%20x%3D%220%22%20y%3D%22490%22%20width%3D%22400%22%20height%3D%2270%22%20fill%3D%22%2304000C%22%20opacity%3D%220.65%22%2F%3E%3C%2Fsvg%3E");
+}
+/* violet tint overlay on photo */
+.esk::after{
+  content:'';position:absolute;inset:0;
+  background:
+    linear-gradient(155deg, rgba(42,10,80,.55) 0%, rgba(90,24,152,.25) 50%, transparent 100%);
+}
 .eov{position:absolute;inset:0;background:linear-gradient(to top,rgba(4,0,12,.97) 0%,rgba(4,0,12,.18) 55%,transparent 100%);opacity:.7;transition:opacity .4s;}
 .egl{position:absolute;inset:0;opacity:0;transition:opacity .4s;pointer-events:none;}
 .ec:nth-child(1) .egl{box-shadow:inset 0 0 55px rgba(90,24,152,.25);}
@@ -137,10 +161,21 @@ body.hov .cr{width:44px;height:44px;border-color:rgba(180,120,255,.6);}
 .edate{display:block;font-family:var(--r);font-size:.52rem;font-weight:300;letter-spacing:.28em;text-transform:uppercase;color:var(--v1);margin-bottom:.6rem;}
 .ename{font-family:var(--c);font-size:1.55rem;font-weight:400;color:var(--cream);line-height:1.2;margin-bottom:.35rem;}
 .egenre{font-family:var(--r);font-size:.62rem;font-weight:200;letter-spacing:.08em;color:rgba(237,224,255,.38);margin-bottom:1.4rem;}
-.efoot{display:flex;align-items:center;justify-content:space-between;}
-.eprice{font-family:var(--c);font-size:1.3rem;color:rgba(180,120,255,.9);}
-.ebtn{font-family:var(--r);font-size:.54rem;font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:var(--cream);border:1px solid rgba(237,224,255,.18);padding:.5rem 1.1rem;text-decoration:none;transition:border-color .3s,color .3s;cursor:none;}
-.ebtn:hover{border-color:var(--v1);color:var(--v1);}
+.efoot{display:flex;align-items:center;justify-content:space-between;gap:1rem;}
+.eprice{font-family:var(--c);font-size:1.3rem;color:rgba(180,120,255,.9);white-space:nowrap;}
+.ebtn{
+  font-family:var(--r);font-size:.58rem;font-weight:300;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--cream);
+  border:1px solid rgba(237,224,255,.35);
+  padding:.75rem 1.6rem;
+  text-decoration:none;
+  transition:background .3s, border-color .3s, color .3s;
+  cursor:none;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+.ebtn:hover{background:var(--v1);border-color:var(--v1);color:var(--cream);}
 
 /* TICKER */
 #bar{padding:4rem 0;background:linear-gradient(90deg,#0c0020 0%,#140030 50%,#0a001a 100%);overflow:hidden;}
@@ -239,7 +274,7 @@ footer{border-top:1px solid rgba(138,79,208,.09);padding:5rem 0 3rem;background:
   .nr { justify-self: end; }
 
   /* hero title smaller */
-  .h-title { font-size: clamp(2rem, 8vw, 3.8rem); letter-spacing: .22em; }
+  .h-title { font-size: clamp(2rem, 8vw, 4.2rem); letter-spacing: .22em; }
 
   /* event cards: 2 columns */
   .eg { grid-template-columns: repeat(2, 1fr); }
@@ -280,7 +315,7 @@ footer{border-top:1px solid rgba(138,79,208,.09);padding:5rem 0 3rem;background:
   .nbtn { padding: .5rem 1rem; font-size: .52rem; letter-spacing: .14em; }
 
   /* hero */
-  .h-logo { width: 52px !important; margin-bottom: 1.2rem; }
+  .h-logo { width: 100px !important; margin-bottom: 1.2rem; }
   .h-eye { font-size: .48rem; letter-spacing: .3em; margin-bottom: 1rem; }
   .h-title {
     font-size: clamp(1.8rem, 9.5vw, 3rem);
@@ -437,7 +472,7 @@ footer{border-top:1px solid rgba(138,79,208,.09);padding:5rem 0 3rem;background:
 
   <div class="hc">
     <!-- VV logo mark above title -->
-    <svg class="h-logo" viewBox="0 0 120 115" width="80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="h-logo" viewBox="0 0 120 115" width="160" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="hv1" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stop-color="#D4B8FF"/>
@@ -646,50 +681,97 @@ footer{border-top:1px solid rgba(138,79,208,.09);padding:5rem 0 3rem;background:
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-/* STAR FIELD — hero only */
+/* STAR RAIN — gravity effect, meteor shower */
 (function() {
   var sc = document.getElementById('star-cv');
   var sx = sc.getContext('2d');
-  var sw, sh, stars = [];
+  var sw, sh, drops = [];
 
   function rsz() {
-    sw = sc.width  = sc.offsetWidth  || window.innerWidth;
-    sh = sc.height = sc.offsetHeight || window.innerHeight;
+    var hero = document.getElementById('hero');
+    sw = sc.width  = hero ? hero.offsetWidth  : window.innerWidth;
+    sh = sc.height = hero ? hero.offsetHeight : window.innerHeight;
+    drops = [];
+    for (var i = 0; i < 320; i++) spawn(true);
   }
 
-  function Star() { this.reset(true); }
-  Star.prototype.reset = function(init) {
-    this.x = Math.random() * sw;
-    this.y = Math.random() * sh;
-    this.r = Math.random() * 0.9 + 0.15;
-    var v = Math.random();
-    this.hue = v < 0.25 ? [200,160,255] : v < 0.4 ? [180,140,240] : [240,235,255];
-    this.baseA = Math.random() * 0.55 + 0.1;
-    this.a = init ? Math.random() * this.baseA : 0;
-    this.speed = Math.random() * 0.008 + 0.002;
-    this.phase = Math.random() * Math.PI * 2;
-  };
-  Star.prototype.tick = function() {
-    this.phase += this.speed;
-    this.a = this.baseA * (0.5 + 0.5 * Math.sin(this.phase));
-  };
-  Star.prototype.draw = function() {
-    var r = this.hue[0], g = this.hue[1], b = this.hue[2];
-    if (this.baseA > 0.45) {
-      sx.beginPath(); sx.arc(this.x, this.y, this.r * 2.5, 0, Math.PI * 2);
-      sx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + (this.a * 0.25) + ')'; sx.fill();
+  function spawn(init) {
+    var d = {};
+    d.x    = Math.random() * sw;
+    d.y    = init ? Math.random() * sh : Math.random() * -120 - 2;
+    /* bigger dots: 0.4 – 1.6px radius */
+    d.r    = Math.random() * 1.2 + 0.4;
+    /* base fall speed: 1.2 – 4.5px/frame (gravity feel) */
+    d.vy0  = Math.random() * 3.3 + 1.2;
+    d.vy   = init ? d.vy0 * Math.random() : d.vy0 * 0.3;
+    /* gravity acceleration: speed up as they fall */
+    d.ay   = Math.random() * 0.018 + 0.006;
+    /* slight horizontal drift */
+    d.vx   = (Math.random() - 0.5) * 0.12;
+    /* colour */
+    var v  = Math.random();
+    d.rgb  = v < 0.15 ? '210,165,255'   /* lilac      */
+           : v < 0.28 ? '185,145,248'   /* lavender   */
+           : v < 0.38 ? '160,120,255'   /* violet     */
+           :             '242,238,255'; /* near-white */
+    /* opacity — bit more visible than before: 0.12 – 0.65 */
+    d.maxA = Math.random() * 0.53 + 0.12;
+    d.a    = init ? Math.random() * d.maxA : 0;
+    drops.push(d);
+  }
+
+  function tick(d) {
+    /* accelerate — gravity effect */
+    d.vy  = Math.min(d.vy + d.ay, d.vy0 * 2.2);
+    d.y  += d.vy;
+    d.x  += d.vx;
+    /* fade in at top 5%, steady, fade out at bottom 10% */
+    var n    = d.y / sh;
+    var mask = n < 0.05 ? n / 0.05 : n > 0.90 ? (1 - n) / 0.10 : 1;
+    d.a = d.maxA * Math.max(0, mask);
+    if (d.y > sh + 12) {
+      d.x   = Math.random() * sw;
+      d.y   = Math.random() * -120 - 2;
+      d.vy0 = Math.random() * 3.3 + 1.2;
+      d.vy  = d.vy0 * 0.3;
+      d.ay  = Math.random() * 0.018 + 0.006;
+      d.vx  = (Math.random() - 0.5) * 0.12;
+      d.a   = 0;
     }
-    sx.beginPath(); sx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-    sx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + this.a + ')'; sx.fill();
-  };
+  }
+
+  function draw(d) {
+    /* elongated tail — length proportional to speed */
+    var tailLen = d.vy * 3.8;
+    if (tailLen > 1.5) {
+      sx.beginPath();
+      sx.moveTo(d.x, d.y);
+      sx.lineTo(d.x - d.vx * 3, d.y - tailLen);
+      sx.strokeStyle = 'rgba(' + d.rgb + ',' + (d.a * 0.28) + ')';
+      sx.lineWidth   = d.r * 0.65;
+      sx.lineCap     = 'round';
+      sx.stroke();
+    }
+    /* soft glow around brighter drops */
+    if (d.maxA > 0.40) {
+      sx.beginPath();
+      sx.arc(d.x, d.y, d.r * 2.4, 0, Math.PI * 2);
+      sx.fillStyle = 'rgba(' + d.rgb + ',' + (d.a * 0.15) + ')';
+      sx.fill();
+    }
+    /* core dot */
+    sx.beginPath();
+    sx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+    sx.fillStyle = 'rgba(' + d.rgb + ',' + d.a + ')';
+    sx.fill();
+  }
 
   window.addEventListener('resize', rsz);
   rsz();
-  for (var i = 0; i < 260; i++) stars.push(new Star());
 
   function frame() {
     sx.clearRect(0, 0, sw, sh);
-    for (var i = 0; i < stars.length; i++) { stars[i].tick(); stars[i].draw(); }
+    for (var i = 0; i < drops.length; i++) { tick(drops[i]); draw(drops[i]); }
     requestAnimationFrame(frame);
   }
   frame();
@@ -765,17 +847,23 @@ document.querySelectorAll('a, button, label, .ec').forEach(function(el) {
   el.addEventListener('mouseleave', function() { document.body.classList.remove('hov'); });
 });
 
-/* HERO TITLE */
+/* HERO TITLE — two lines stacked */
 var TEL = document.getElementById('hTitle');
 var td = 0.5;
-var HTXT = 'VELVET INFINITY';
-for (var i = 0; i < HTXT.length; i++) {
-  var ch = HTXT[i];
-  var s = document.createElement('span');
-  if (ch === ' ') { s.className = 'sp'; }
-  else { s.className = 'lt'; s.textContent = ch; s.style.animationDelay = td + 's'; td += 0.045; }
-  TEL.appendChild(s);
-}
+var WORDS = ['VELVET', 'INFINITY'];
+WORDS.forEach(function(word) {
+  var line = document.createElement('div');
+  line.className = 'line';
+  for (var i = 0; i < word.length; i++) {
+    var s = document.createElement('span');
+    s.className = 'lt';
+    s.textContent = word[i];
+    s.style.animationDelay = td + 's';
+    td += 0.045;
+    line.appendChild(s);
+  }
+  TEL.appendChild(line);
+});
 
 /* NAV */
 window.addEventListener('scroll', function() {
