@@ -681,7 +681,7 @@ footer{border-top:1px solid rgba(138,79,208,.09);padding:5rem 0 3rem;background:
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-/* STAR RAIN — gravity effect, meteor shower */
+/* STAR RAIN — snowfall pace, gentle gravity */
 (function() {
   var sc = document.getElementById('star-cv');
   var sx = sc.getContext('2d');
@@ -701,65 +701,62 @@ footer{border-top:1px solid rgba(138,79,208,.09);padding:5rem 0 3rem;background:
     d.y    = init ? Math.random() * sh : Math.random() * -120 - 2;
     /* bigger dots: 0.4 – 1.6px radius */
     d.r    = Math.random() * 1.2 + 0.4;
-    /* base fall speed: 1.2 – 4.5px/frame (gravity feel) */
-    d.vy0  = Math.random() * 3.3 + 1.2;
-    d.vy   = init ? d.vy0 * Math.random() : d.vy0 * 0.3;
-    /* gravity acceleration: speed up as they fall */
-    d.ay   = Math.random() * 0.018 + 0.006;
-    /* slight horizontal drift */
-    d.vx   = (Math.random() - 0.5) * 0.12;
+    /* slow snowfall: 0.25 – 0.85px/frame */
+    d.vy0  = Math.random() * 0.6 + 0.25;
+    d.vy   = init ? d.vy0 * Math.random() : d.vy0 * 0.2;
+    /* very gentle gravity: just enough to feel like weight */
+    d.ay   = Math.random() * 0.003 + 0.001;
+    /* slight horizontal drift — snow sway */
+    d.vx   = (Math.random() - 0.5) * 0.08;
+    d.wx   = Math.random() * Math.PI * 2;
+    d.wsx  = (Math.random() * 0.008 + 0.003);
     /* colour */
     var v  = Math.random();
-    d.rgb  = v < 0.15 ? '210,165,255'   /* lilac      */
-           : v < 0.28 ? '185,145,248'   /* lavender   */
-           : v < 0.38 ? '160,120,255'   /* violet     */
-           :             '242,238,255'; /* near-white */
-    /* opacity — bit more visible than before: 0.12 – 0.65 */
+    d.rgb  = v < 0.15 ? '210,165,255'
+           : v < 0.28 ? '185,145,248'
+           : v < 0.38 ? '160,120,255'
+           :             '242,238,255';
     d.maxA = Math.random() * 0.53 + 0.12;
     d.a    = init ? Math.random() * d.maxA : 0;
     drops.push(d);
   }
 
   function tick(d) {
-    /* accelerate — gravity effect */
-    d.vy  = Math.min(d.vy + d.ay, d.vy0 * 2.2);
-    d.y  += d.vy;
-    d.x  += d.vx;
-    /* fade in at top 5%, steady, fade out at bottom 10% */
+    d.vy   = Math.min(d.vy + d.ay, d.vy0 * 1.6);
+    d.wx  += d.wsx;
+    d.y   += d.vy;
+    d.x   += d.vx + Math.sin(d.wx) * 0.18;
     var n    = d.y / sh;
     var mask = n < 0.05 ? n / 0.05 : n > 0.90 ? (1 - n) / 0.10 : 1;
     d.a = d.maxA * Math.max(0, mask);
     if (d.y > sh + 12) {
       d.x   = Math.random() * sw;
       d.y   = Math.random() * -120 - 2;
-      d.vy0 = Math.random() * 3.3 + 1.2;
-      d.vy  = d.vy0 * 0.3;
-      d.ay  = Math.random() * 0.018 + 0.006;
-      d.vx  = (Math.random() - 0.5) * 0.12;
+      d.vy0 = Math.random() * 0.6 + 0.25;
+      d.vy  = d.vy0 * 0.2;
+      d.ay  = Math.random() * 0.003 + 0.001;
+      d.vx  = (Math.random() - 0.5) * 0.08;
       d.a   = 0;
     }
   }
 
   function draw(d) {
-    /* elongated tail — length proportional to speed */
-    var tailLen = d.vy * 3.8;
-    if (tailLen > 1.5) {
+    var tailLen = d.vy * 2.2;
+    if (tailLen > 0.8) {
       sx.beginPath();
       sx.moveTo(d.x, d.y);
-      sx.lineTo(d.x - d.vx * 3, d.y - tailLen);
-      sx.strokeStyle = 'rgba(' + d.rgb + ',' + (d.a * 0.28) + ')';
-      sx.lineWidth   = d.r * 0.65;
+      sx.lineTo(d.x - d.vx * 2, d.y - tailLen);
+      sx.strokeStyle = 'rgba(' + d.rgb + ',' + (d.a * 0.22) + ')';
+      sx.lineWidth   = d.r * 0.55;
       sx.lineCap     = 'round';
       sx.stroke();
     }
-    /* soft glow around brighter drops */
     if (d.maxA > 0.40) {
       sx.beginPath();
-      sx.arc(d.x, d.y, d.r * 2.4, 0, Math.PI * 2);
-      sx.fillStyle = 'rgba(' + d.rgb + ',' + (d.a * 0.15) + ')';
+      sx.arc(d.x, d.y, d.r * 2.2, 0, Math.PI * 2);
+      sx.fillStyle = 'rgba(' + d.rgb + ',' + (d.a * 0.13) + ')';
       sx.fill();
     }
-    /* core dot */
     sx.beginPath();
     sx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
     sx.fillStyle = 'rgba(' + d.rgb + ',' + d.a + ')';
