@@ -1359,6 +1359,285 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a) {
     }, 320);
   });
 });
+
+/* ============================================================
+   LIGHTNING BOLT EFFECT
+   Dispara un rayo realista desde el punto de clic hasta el
+   fondo de la página cuando el usuario hace clic en zonas
+   que NO sean botones, enlaces ni controles interactivos.
+   Color: azul eléctrico (#00BFFF) → blanco platino (#E8F4FF)
+   ============================================================ */
+(function() {
+
+  /* --- Canvas overlay para los rayos --- */
+  var LC = document.createElement('canvas');
+  LC.id = 'lightning-cv';
+  LC.style.cssText = [
+    'position:fixed',
+    'inset:0',
+    'z-index:7999',          /* justo debajo del veil */
+    'pointer-events:none',
+    'width:100%',
+    'height:100%'
+  ].join(';');
+  document.body.appendChild(LC);
+
+  var lctx = LC.getContext('2d');
+  var LW, LH;
+
+  function lResize() {
+    LW = LC.width  = window.innerWidth;
+    LH = LC.height = window.innerHeight;
+  }
+  window.addEventListener('resize', lResize);
+  lResize();
+
+  /* --- Genera un segmento fractal (algoritmo midpoint displacement) ---
+     x1,y1 → x2,y2 : puntos de inicio y fin
+     roughness      : cuánto se desplaza el punto medio (0–1)
+     depth          : niveles de recursión (más = más detalle)
+     returns        : array de puntos [{x,y}, ...]
+  */
+  function fractalLine(x1, y1, x2, y2, roughness, depth) {
+    if (depth === 0) return [{ x: x1, y: y1 }, { x: x2, y: y2 }];
+
+    var mx = (x1 + x2) / 2;
+    var my = (y1 + y2) / 2;
+    var len = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+    /* desplaza perpendicularmente */
+    var nx = -(y2 - y1) / len;
+    var ny =  (x2 - x1) / len;
+    var disp = (Math.random() - 0.5) * 2 * roughness * len;
+    mx += nx * disp;
+    my += ny * disp;
+
+    var left  = fractalLine(x1, y1, mx, my, roughness * 0.62, depth - 1);
+    var right = fractalLine(mx, my, x2, y2, roughness * 0.62, depth - 1);
+    /* une los dos segmentos sin duplicar el punto medio */
+    return left.slice(0, -1).concat(right);
+  }
+
+  /* --- Genera una rama secundaria desde un punto del rayo --- */
+  function makeBranch(px, py, dirX, dirY, len, depth) {
+    if (depth === 0 || len < 30) return [];
+    /* ángulo desviado entre 20° y 45° */
+    var angle = (Math.random() > 0.5 ? 1 : -1) * (0.35 + Math.random() * 0.45);
+    var cos = Math.cos(angle), sin = Math.sin(angle);
+    var ex = px + (dirX * cos - dirY * sin) * len;
+    var ey = py + (dirX * sin + dirY * cos) * len;
+    var pts = fractalLine(px, py, ex, ey, 0.42, 5);
+    var sub = makeBranch(ex, ey, dirX, dirY, len * 0.55, depth - 1);
+    return [{ pts: pts, alpha: 0.55 + Math.random() * 0.3, width: 0.7 }]
+           .concat(sub);
+  }
+
+  /* --- Crea la estructura completa de un rayo ---
+     ox, oy : origen (punto de clic, coords de ventana)
+  */
+  function buildBolt(ox, oy) {
+    /* el rayo termina en la parte inferior de la PÁGINA (no solo ventana) */
+    var pageBottom = document.documentElement.scrollHeight;
+    var destY = pageBottom - window.scrollY; /* convertido a coord. ventana */
+
+    /* pequeña variación horizontal en el destino */
+    var destX = ox + (Math.random() - 0.5) * 180;
+
+    var mainPts = fractalLine(ox, oy, destX, destY, 0.48, 9);
+
+    /* dirección normalizada del tronco */
+    var dx = destX - ox, dy = destY - oy;
+    var dlen = Math.sqrt(dx * dx + dy * dy);
+    dx /= dlen; dy /= dlen;
+
+    /* ramas: una por cada ~8 puntos del tronco */
+    var branches = [];
+    for (var i = 8; i < mainPts.length - 8; i += Math.floor(6 + Math.random() * 10)) {
+      var blen = 60 + Math.random() * 180;
+      var sub = makeBranch(mainPts[i].x, mainPts[i].y, dx, dy, blen, 2);
+      branches = branches.concat(sub);
+    }
+
+    return { mainPts: mainPts, branches: branches };
+  }
+
+  /* --- Dibuja un segmento polilínea con gradiente azul→blanco --- */
+  function drawSegment(pts, alpha, lineWidth, phase) {
+    if (pts.length < 2) return;
+
+    /* gradiente a lo largo del rayo */
+    var x0 = pts[0].x,            y0 = pts[0].y;
+    var x1 = pts[pts.length-1].x, y1 = pts[pts.length-1].y;
+    var grad;
+    try {
+      grad = lctx.createLinearGradient(x0, y0, x1, y1);
+    } catch(e) { return; }
+
+    /* azul eléctrico → blanco platino → azul eléctrico más tenue */
+    grad.addColorStop(0,    'rgba(180, 230, 255, ' + alpha + ')');
+    grad.addColorStop(0.18, 'rgba(255, 255, 255, ' + Math.min(1, alpha * 1.6) + ')');
+    grad.addColorStop(0.5,  'rgba(100, 200, 255, ' + alpha + ')');
+    grad.addColorStop(0.82, 'rgba(255, 255, 255, ' + Math.min(1, alpha * 1.4) + ')');
+    grad.addColorStop(1,    'rgba(0,   180, 255, ' + (alpha * 0.5) + ')');
+
+    /* trazo exterior difuminado (halo) */
+    lctx.save();
+    lctx.globalCompositeOperation = 'lighter';
+    lctx.shadowColor  = 'rgba(0, 160, 255, ' + alpha * 0.9 + ')';
+    lctx.shadowBlur   = 22;
+    lctx.strokeStyle  = grad;
+    lctx.lineWidth    = lineWidth * 3.5;
+    lctx.lineCap      = 'round';
+    lctx.lineJoin     = 'round';
+    lctx.globalAlpha  = alpha * 0.28;
+    lctx.beginPath();
+    lctx.moveTo(pts[0].x, pts[0].y);
+    for (var i = 1; i < pts.length; i++) lctx.lineTo(pts[i].x, pts[i].y);
+    lctx.stroke();
+
+    /* trazo núcleo nítido */
+    lctx.shadowBlur   = 10;
+    lctx.lineWidth    = lineWidth;
+    lctx.globalAlpha  = alpha;
+    lctx.beginPath();
+    lctx.moveTo(pts[0].x, pts[0].y);
+    for (var j = 1; j < pts.length; j++) lctx.lineTo(pts[j].x, pts[j].y);
+    lctx.stroke();
+
+    /* trazo blanco platino central muy fino */
+    lctx.shadowColor  = 'rgba(255,255,255,0.9)';
+    lctx.shadowBlur   = 4;
+    lctx.strokeStyle  = 'rgba(230, 245, 255, ' + Math.min(1, alpha * 1.8) + ')';
+    lctx.lineWidth    = lineWidth * 0.28;
+    lctx.globalAlpha  = Math.min(1, alpha * 1.2);
+    lctx.beginPath();
+    lctx.moveTo(pts[0].x, pts[0].y);
+    for (var k = 1; k < pts.length; k++) lctx.lineTo(pts[k].x, pts[k].y);
+    lctx.stroke();
+
+    lctx.restore();
+  }
+
+  /* --- Flash de impacto en el punto de origen --- */
+  function drawFlash(ox, oy, alpha) {
+    lctx.save();
+    lctx.globalCompositeOperation = 'lighter';
+
+    var rOuter = 120 * alpha;
+    var gOuter = lctx.createRadialGradient(ox, oy, 0, ox, oy, rOuter);
+    gOuter.addColorStop(0,   'rgba(200, 240, 255, ' + alpha * 0.8 + ')');
+    gOuter.addColorStop(0.3, 'rgba(80,  180, 255, ' + alpha * 0.4 + ')');
+    gOuter.addColorStop(1,   'rgba(0,   100, 200,  0)');
+
+    lctx.beginPath();
+    lctx.arc(ox, oy, rOuter, 0, Math.PI * 2);
+    lctx.fillStyle = gOuter;
+    lctx.fill();
+
+    /* punto central blanco */
+    var rInner = 8 * alpha;
+    var gInner = lctx.createRadialGradient(ox, oy, 0, ox, oy, rInner);
+    gInner.addColorStop(0,  'rgba(255,255,255,' + alpha + ')');
+    gInner.addColorStop(1,  'rgba(180,230,255, 0)');
+    lctx.beginPath();
+    lctx.arc(ox, oy, rInner, 0, Math.PI * 2);
+    lctx.fillStyle = gInner;
+    lctx.fill();
+
+    lctx.restore();
+  }
+
+  /* --- Sistema de animación de rayos activos --- */
+  var activeBolts = [];   /* [{ bolt, t, duration }] */
+  var rafRunning = false;
+
+  function animLoop() {
+    if (activeBolts.length === 0) { rafRunning = false; return; }
+    rafRunning = true;
+
+    lctx.clearRect(0, 0, LW, LH);
+
+    var now = performance.now();
+    activeBolts = activeBolts.filter(function(b) {
+      return (now - b.start) < b.duration;
+    });
+
+    activeBolts.forEach(function(b) {
+      var elapsed  = now - b.start;
+      var progress = elapsed / b.duration;  /* 0 → 1 */
+
+      /* curva de brillo: ataque rápido, decaimiento exponencial */
+      var alpha;
+      if (progress < 0.12) {
+        alpha = progress / 0.12;           /* fade in */
+      } else {
+        alpha = 1 - ((progress - 0.12) / 0.88); /* fade out */
+        /* pequeño parpadeo 1/4 del camino */
+        if (progress > 0.25 && progress < 0.32) alpha *= 0.3 + Math.random() * 0.5;
+      }
+      alpha = Math.max(0, Math.min(1, alpha));
+
+      /* flash de impacto solo al inicio */
+      if (progress < 0.35) {
+        drawFlash(b.ox, b.oy, alpha * (1 - progress / 0.35));
+      }
+
+      /* tronco principal */
+      drawSegment(b.bolt.mainPts, alpha, 1.6, progress);
+
+      /* ramas */
+      b.bolt.branches.forEach(function(br) {
+        drawSegment(br.pts, alpha * br.alpha * 0.75, br.width, progress);
+      });
+    });
+
+    requestAnimationFrame(animLoop);
+  }
+
+  /* --- Lanza un rayo desde (ox, oy) en coordenadas de ventana --- */
+  function fireBolt(ox, oy) {
+    var bolt = buildBolt(ox, oy);
+    activeBolts.push({
+      bolt:     bolt,
+      ox:       ox,
+      oy:       oy,
+      start:    performance.now(),
+      duration: 420 + Math.random() * 180   /* 420–600 ms */
+    });
+    if (!rafRunning) animLoop();
+  }
+
+  /* --- Tags que NO deben disparar el rayo --- */
+  var SKIP_TAGS = {
+    A:1, BUTTON:1, INPUT:1, SELECT:1, TEXTAREA:1,
+    LABEL:1, NAV:1, FORM:1
+  };
+
+  /* También omitir si el elemento o algún ancestro tiene clase interactiva */
+  var SKIP_CLASSES = ['nbtn','h-cta','nlinks','nr','nl'];
+
+  function isInteractive(el) {
+    var node = el;
+    while (node && node !== document.body) {
+      if (SKIP_TAGS[node.tagName]) return true;
+      if (node.classList) {
+        for (var i = 0; i < SKIP_CLASSES.length; i++) {
+          if (node.classList.contains(SKIP_CLASSES[i])) return true;
+        }
+      }
+      node = node.parentElement;
+    }
+    return false;
+  }
+
+  /* --- Listener global de clic --- */
+  document.addEventListener('click', function(e) {
+    /* Solo actua dentro del hero o en la portada (primer 100vh aprox.) */
+    if (isInteractive(e.target)) return;
+
+    fireBolt(e.clientX, e.clientY);
+  });
+
+})(); /* fin IIFE lightning */
 </script>
 </body>
 </html>
